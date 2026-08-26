@@ -111,10 +111,6 @@
     font-size:16px; opacity:0; transition:.3s; text-shadow:0 1px 4px rgba(0,0,0,.4);
   }
   .gallery figure:hover::after{opacity:1}
-  /* 滚动淡入 */
-  .fade{opacity:0; transform:translateY(30px); transition:opacity .9s ease, transform .9s ease}
-  .fade.in{opacity:1; transform:none}
-  .fade .gallery figure{transition:transform .55s ease, opacity .9s ease}
   /* 名胜介绍 */
   .sights{
     max-width:820px; margin:44px auto 0; padding:26px 32px;
@@ -125,6 +121,9 @@
   .sight:last-child{border-bottom:none}
   .sight b{color:var(--ink); font-size:15.5px; min-width:92px; letter-spacing:.12em; flex-shrink:0; padding-top:2px}
   .sight span{color:var(--ink-soft); font-size:14px}
+  /* 滚动淡入 */
+  .fade{opacity:0; transform:translateY(30px); transition:opacity .9s ease, transform .9s ease}
+  .fade.in{opacity:1; transform:none}
   /* divider */
   .divider{display:flex; align-items:center; justify-content:center; gap:14px; color:var(--gold);
     margin:56px 0 6px; font-size:11px; letter-spacing:.5em}
@@ -448,6 +447,7 @@ document.addEventListener("keydown", e => {
 
 /* ---------- 滚动进度条 ---------- */
 const progress = document.getElementById("progress");
+const toTop = document.getElementById("toTop");
 addEventListener("scroll", () => {
   const h = document.documentElement;
   progress.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + "%";
@@ -455,7 +455,6 @@ addEventListener("scroll", () => {
 }, { passive: true });
 
 /* ---------- 回到顶部 ---------- */
-const toTop = document.getElementById("toTop");
 toTop.addEventListener("click", () => scrollTo({ top: 0, behavior: "smooth" }));
 
 /* ---------- 滚动淡入 ---------- */
