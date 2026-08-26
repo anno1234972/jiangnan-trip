@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>江南十日 · 一家人的漫游</title>
+<style>
+  :root{
+    --paper:#FAF6EF; --ink:#3A3530; --ink-soft:#6E655C; --gold:#B08968;
+    --line:rgba(176,137,104,.35);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Songti SC","STSong","SimSun","Noto Serif SC",Georgia,serif;
+    background:var(--paper); color:var(--ink); line-height:1.9;
+    background-image:radial-gradient(rgba(176,137,104,.05) 1px, transparent 1px);
+    background-size:22px 22px;
+  }
+  /* ============ Hero ============ */
+  .hero{
+    position:relative; height:100vh; min-height:560px;
+    display:flex; align-items:center; justify-content:center; text-align:center;
+    overflow:hidden;
+  }
+  .hero .bg{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:saturate(.92)}
+  .hero::after{content:""; position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(20,16,12,.38) 0%, rgba(20,16,12,.18) 45%, rgba(250,246,239,.92) 100%);}
+  .hero .inner{position:relative; z-index:2; padding:0 24px; color:#FBF7F0}
+  .hero .kicker{letter-spacing:.6em; font-size:14px; opacity:.9; text-indent:.6em; margin-bottom:22px}
+  .hero h1{
+    font-size:clamp(42px, 9vw, 88px); font-weight:600; letter-spacing:.18em; text-indent:.18em;
+    text-shadow:0 4px 30px rgba(0,0,0,.35);
+  }
+  .hero .sub{margin-top:22px; font-size:clamp(14px,2.2vw,18px); letter-spacing:.35em; text-indent:.35em; opacity:.95}
+  .hero .scroll-hint{
+    position:absolute; z-index:2; bottom:64px; left:50%; transform:translateX(-50%);
+    color:#FBF7F0; font-size:13px; letter-spacing:.3em; opacity:.85; animation:float 2.4s ease-in-out infinite;
+  }
+  @keyframes float{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,10px)}}
+  /* ============ Nav ============ */
+  nav{
+    position:sticky; top:0; z-index:50; background:rgba(250,246,239,.92); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line); padding:10px 16px; text-align:center;
+  }
+  nav a{
+    display:inline-block; margin:2px 18px; color:var(--ink-soft); text-decoration:none;
+    font-size:15px; letter-spacing:.2em; transition:.25s;
+  }
+  nav a:hover{color:var(--gold)}
+  /* ============ Sections ============ */
+  .wrap{max-width:1120px; margin:0 auto; padding:0 22px}
+  .intro{max-width:720px; margin:90px auto 60px; text-align:center}
+  .intro .ornament{color:var(--gold); letter-spacing:.5em; font-size:13px; margin-bottom:18px}
+  .intro p{font-size:17px; color:var(--ink-soft)}
+  .intro .families{margin-top:26px; letter-spacing:.3em; font-size:14px; color:var(--gold)}
+  .city{padding:70px 0 30px}
+  .city-head{text-align:center; margin-bottom:44px}
+  .city-head .cn{font-size:40px; letter-spacing:.3em; text-indent:.3em; font-weight:600}
+  .city-head .en{color:var(--gold); letter-spacing:.45em; font-size:12px; margin-top:10px; text-transform:uppercase}
+  .city-head .poem{
+    margin-top:18px; color:var(--ink-soft); font-size:15px; letter-spacing:.12em;
+    display:flex; align-items:center; justify-content:center; gap:16px;
+  }
+  .city-head .poem::before,.city-head .poem::after{content:"—"; color:var(--gold); opacity:.7}
+  .city-head .note{margin-top:10px; font-size:13.5px; color:#9a8f82; letter-spacing:.08em}
+  /* masonry gallery */
+  .gallery{columns:3 260px; column-gap:16px}
+  .gallery figure{
+    break-inside:avoid; margin:0 0 16px; position:relative; overflow:hidden; border-radius:10px;
+    box-shadow:0 8px 26px rgba(60,45,30,.14); cursor:zoom-in;
+  }
+  .gallery img{width:100%; display:block; transition:transform .6s ease}
+  .gallery figure:hover img{transform:scale(1.045)}
+  .gallery figure::after{
+    content:"↗"; position:absolute; right:12px; bottom:8px; color:rgba(255,255,255,.9);
+    font-size:15px; opacity:0; transition:.3s;
+  }
+  .gallery figure:hover::after{opacity:1}
+  /* divider */
+  .divider{display:flex; align-items:center; justify-content:center; gap:14px; color:var(--gold);
+    margin:60px 0 10px; font-size:12px; letter-spacing:.4em}
+  .divider::before,.divider::after{content:""; width:70px; height:1px; background:var(--line)}
+  /* closing */
+  .closing{max-width:640px; margin:90px auto; text-align:center}
+  .closing .quote{font-size:19px; color:var(--ink); letter-spacing:.08em; line-height:2.2}
+  .closing .sign{margin-top:30px; color:var(--gold); letter-spacing:.3em; font-size:14px}
+  footer{
+    text-align:center; padding:40px 20px 60px; color:#a3988a; font-size:13px;
+    border-top:1px solid var(--line); letter-spacing:.15em;
+  }
+  /* lightbox */
+  #lightbox{
+    position:fixed; inset:0; z-index:100; display:none; align-items:center; justify-content:center;
+    background:rgba(15,12,9,.92); cursor:zoom-out; padding:30px;
+  }
+  #lightbox img{max-width:92vw; max-height:90vh; object-fit:contain; border-radius:6px;
+    box-shadow:0 10px 60px rgba(0,0,0,.5)}
+  @media (max-width:640px){ .hero h1{letter-spacing:.1em;text-indent:.1em} }
+</style>
+</head>
+<body>
+
+<!-- ======== Hero ======== -->
+<header class="hero">
+  <img class="bg" src="images/img_12.jpg" alt="江南" loading="eager">
+  <div class="inner">
+    <div class="kicker">一 家 人 的 夏 日 漫 游</div>
+    <h1>江南十日</h1>
+    <div class="sub">上海 · 杭州 · 苏州 · 扬州</div>
+  </div>
+  <div class="scroll-hint">向 下 漫 游</div>
+</header>
+
+<!-- ======== Nav ======== -->
+<nav>
+  <a href="#shanghai">上海</a>
+  <a href="#hangzhou">杭州</a>
+  <a href="#suzhou">苏州</a>
+  <a href="#yangzhou">扬州</a>
+</nav>
+
+<main class="wrap">
+
+  <!-- ======== Intro ======== -->
+  <section class="intro">
+    <div class="ornament">❖ ❖ ❖</div>
+    <p>
+      二〇二六年的盛夏，我和爸爸、妈妈、姥姥，用十天的时间，
+      从一座城走到另一座城。上海的霓虹，杭州的烟雨，苏州的水巷，
+      扬州的明月——都被收进小小的相机里，也收进往后的日子里。
+    </p>
+    <div class="families">我 · 爸爸 · 妈妈 · 姥姥</div>
+  </section>
+
+  <!-- ======== 上海 ======== -->
+  <section class="city" id="shanghai">
+    <div class="city-head">
+      <div class="cn">上海</div>
+      <div class="en">Shanghai</div>
+      <div class="poem">十里洋场 · 霓虹如昼</div>
+      <div class="note">第一站 · 我们站在外滩的晚风里</div>
+    </div>
+    <div class="gallery">
+      <figure><img src="images/img_01.jpg" alt="上海 1" loading="lazy"></figure>
+      <figure><img src="images/img_02.jpg" alt="上海 2" loading="lazy"></figure>
+      <figure><img src="images/img_03.jpg" alt="上海 3" loading="lazy"></figure>
+      <figure><img src="images/img_04.jpg" alt="上海 4" loading="lazy"></figure>
+      <figure><img src="images/img_05.jpg" alt="上海 5" loading="lazy"></figure>
+      <figure><img src="images/img_06.jpg" alt="上海 6" loading="lazy"></figure>
+      <figure><img src="images/img_07.jpg" alt="上海 7" loading="lazy"></figure>
+      <figure><img src="images/img_08.jpg" alt="上海 8" loading="lazy"></figure>
+      <figure><img src="images/img_09.jpg" alt="上海 9" loading="lazy"></figure>
+    </div>
+  </section>
+
+  <div class="divider">❖</div>
+
+  <!-- ======== 杭州 ======== -->
+  <section class="city" id="hangzhou">
+    <div class="city-head">
+      <div class="cn">杭州</div>
+      <div class="en">Hangzhou</div>
+      <div class="poem">欲把西湖比西子 · 淡妆浓抹总相宜</div>
+      <div class="note">第二站 · 姥姥说，西湖的雨是甜的</div>
+    </div>
+    <div class="gallery">
+      <figure><img src="images/img_10.jpg" alt="杭州 1" loading="lazy"></figure>
+      <figure><img src="images/img_11.jpg" alt="杭州 2" loading="lazy"></figure>
+      <figure><img src="images/img_12.jpg" alt="杭州 3" loading="lazy"></figure>
+      <figure><img src="images/img_13.jpg" alt="杭州 4" loading="lazy"></figure>
+      <figure><img src="images/img_14.jpg" alt="杭州 5" loading="lazy"></figure>
+      <figure><img src="images/img_15.jpg" alt="杭州 6" loading="lazy"></figure>
+      <figure><img src="images/img_16.jpg" alt="杭州 7" loading="lazy"></figure>
+      <figure><img src="images/img_17.jpg" alt="杭州 8" loading="lazy"></figure>
+      <figure><img src="images/img_18.jpg" alt="杭州 9" loading="lazy"></figure>
+    </div>
+  </section>
+
+  <div class="divider">❖</div>
+
+  <!-- ======== 苏州 ======== -->
+  <section class="city" id="suzhou">
+    <div class="city-head">
+      <div class="cn">苏州</div>
+      <div class="en">Suzhou</div>
+      <div class="poem">君到姑苏见 · 人家尽枕河</div>
+      <div class="note">第三站 · 船橹摇过，把时光摇慢</div>
+    </div>
+    <div class="gallery">
+      <figure><img src="images/img_19.jpg" alt="苏州 1" loading="lazy"></figure>
+      <figure><img src="images/img_20.jpg" alt="苏州 2" loading="lazy"></figure>
+      <figure><img src="images/img_21.jpg" alt="苏州 3" loading="lazy"></figure>
+      <figure><img src="images/img_22.jpg" alt="苏州 4" loading="lazy"></figure>
+      <figure><img src="images/img_23.jpg" alt="苏州 5" loading="lazy"></figure>
+      <figure><img src="images/img_24.jpg" alt="苏州 6" loading="lazy"></figure>
+      <figure><img src="images/img_25.jpg" alt="苏州 7" loading="lazy"></figure>
+      <figure><img src="images/img_26.jpg" alt="苏州 8" loading="lazy"></figure>
+      <figure><img src="images/img_27.jpg" alt="苏州 9" loading="lazy"></figure>
+    </div>
+  </section>
+
+  <div class="divider">❖</div>
+
+  <!-- ======== 扬州 ======== -->
+  <section class="city" id="yangzhou">
+    <div class="city-head">
+      <div class="cn">扬州</div>
+      <div class="en">Yangzhou</div>
+      <div class="poem">春风十里扬州路 · 卷上珠帘总不如</div>
+      <div class="note">第四站 · 瘦西湖畔，一程圆满</div>
+    </div>
+    <div class="gallery">
+      <figure><img src="images/img_28.jpg" alt="扬州 1" loading="lazy"></figure>
+      <figure><img src="images/img_29.jpg" alt="扬州 2" loading="lazy"></figure>
+      <figure><img src="images/img_30.jpg" alt="扬州 3" loading="lazy"></figure>
+      <figure><img src="images/img_31.jpg" alt="扬州 4" loading="lazy"></figure>
+      <figure><img src="images/img_32.jpg" alt="扬州 5" loading="lazy"></figure>
+      <figure><img src="images/img_33.jpg" alt="扬州 6" loading="lazy"></figure>
+      <figure><img src="images/img_34.jpg" alt="扬州 7" loading="lazy"></figure>
+      <figure><img src="images/img_35.jpg" alt="扬州 8" loading="lazy"></figure>
+      <figure><img src="images/img_36.jpg" alt="扬州 9" loading="lazy"></figure>
+    </div>
+  </section>
+
+  <!-- ======== Closing ======== -->
+  <section class="closing">
+    <div class="quote">
+      「旅行的意义，不是看了多少风景，<br>
+      而是和最重要的人，一起走过这些风景。」
+    </div>
+    <div class="sign">—— 写于归来后的夏天</div>
+  </section>
+
+</main>
+
+<footer>
+  江南十日 · 2026 夏　|　上海 — 杭州 — 苏州 — 扬州<br>
+  与爸爸、妈妈、姥姥同行
+</footer>
+
+<!-- ======== Lightbox ======== -->
+<div id="lightbox"></div>
+
+<script>
+  const lb = document.getElementById("lightbox");
+  document.querySelectorAll(".gallery img").forEach(img => {
+    img.addEventListener("click", () => {
+      lb.innerHTML = `<img src="${img.src}" alt="">`;
+      lb.style.display = "flex";
+    });
+  });
+  lb.addEventListener("click", () => { lb.style.display = "none"; });
+  document.addEventListener("keydown", e => { if (e.key === "Escape") lb.style.display = "none"; });
+</script>
+</body>
+</html>
