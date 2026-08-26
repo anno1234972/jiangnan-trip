@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>江南十日 · 一家人的漫游</title>
+<title>江南十日 · 四城漫游</title>
 <style>
   :root{
     --paper:#FAF6EF; --ink:#3A3530; --ink-soft:#6E655C; --gold:#B08968;
@@ -19,93 +19,97 @@
   }
   /* ============ Hero ============ */
   .hero{
-    position:relative; height:100vh; min-height:560px;
+    position:relative; height:92vh; min-height:540px;
     display:flex; align-items:center; justify-content:center; text-align:center;
     overflow:hidden;
   }
-  .hero .bg{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:saturate(.92)}
+  .hero .bg{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:saturate(.9) brightness(.92)}
   .hero::after{content:""; position:absolute; inset:0;
-    background:linear-gradient(180deg, rgba(20,16,12,.38) 0%, rgba(20,16,12,.18) 45%, rgba(250,246,239,.92) 100%);}
+    background:linear-gradient(180deg, rgba(20,16,12,.42) 0%, rgba(20,16,12,.16) 48%, rgba(250,246,239,.94) 100%);}
   .hero .inner{position:relative; z-index:2; padding:0 24px; color:#FBF7F0}
-  .hero .kicker{letter-spacing:.6em; font-size:14px; opacity:.9; text-indent:.6em; margin-bottom:22px}
+  .hero .kicker{letter-spacing:.7em; font-size:13px; opacity:.92; text-indent:.7em; margin-bottom:24px}
   .hero h1{
-    font-size:clamp(42px, 9vw, 88px); font-weight:600; letter-spacing:.18em; text-indent:.18em;
-    text-shadow:0 4px 30px rgba(0,0,0,.35);
+    font-size:clamp(44px, 10vw, 96px); font-weight:600; letter-spacing:.2em; text-indent:.2em;
+    text-shadow:0 4px 34px rgba(0,0,0,.38);
   }
-  .hero .sub{margin-top:22px; font-size:clamp(14px,2.2vw,18px); letter-spacing:.35em; text-indent:.35em; opacity:.95}
+  .hero .sub{margin-top:24px; font-size:clamp(13px,2vw,17px); letter-spacing:.4em; text-indent:.4em; opacity:.95}
   .hero .scroll-hint{
-    position:absolute; z-index:2; bottom:64px; left:50%; transform:translateX(-50%);
-    color:#FBF7F0; font-size:13px; letter-spacing:.3em; opacity:.85; animation:float 2.4s ease-in-out infinite;
+    position:absolute; z-index:2; bottom:60px; left:50%; transform:translateX(-50%);
+    color:#FBF7F0; font-size:12px; letter-spacing:.35em; opacity:.85; animation:float 2.4s ease-in-out infinite;
   }
   @keyframes float{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,10px)}}
   /* ============ Nav ============ */
   nav{
-    position:sticky; top:0; z-index:50; background:rgba(250,246,239,.92); backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--line); padding:10px 16px; text-align:center;
+    position:sticky; top:0; z-index:50; background:rgba(250,246,239,.93); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line); padding:11px 16px; text-align:center;
   }
   nav a{
-    display:inline-block; margin:2px 18px; color:var(--ink-soft); text-decoration:none;
-    font-size:15px; letter-spacing:.2em; transition:.25s;
+    display:inline-block; margin:2px 22px; color:var(--ink-soft); text-decoration:none;
+    font-size:15px; letter-spacing:.25em; transition:.25s;
   }
   nav a:hover{color:var(--gold)}
   /* ============ Sections ============ */
-  .wrap{max-width:1120px; margin:0 auto; padding:0 22px}
-  .intro{max-width:720px; margin:90px auto 60px; text-align:center}
-  .intro .ornament{color:var(--gold); letter-spacing:.5em; font-size:13px; margin-bottom:18px}
-  .intro p{font-size:17px; color:var(--ink-soft)}
-  .intro .families{margin-top:26px; letter-spacing:.3em; font-size:14px; color:var(--gold)}
-  .city{padding:70px 0 30px}
-  .city-head{text-align:center; margin-bottom:44px}
-  .city-head .cn{font-size:40px; letter-spacing:.3em; text-indent:.3em; font-weight:600}
-  .city-head .en{color:var(--gold); letter-spacing:.45em; font-size:12px; margin-top:10px; text-transform:uppercase}
+  .wrap{max-width:1160px; margin:0 auto; padding:0 22px}
+  .intro{max-width:680px; margin:88px auto 56px; text-align:center}
+  .intro .ornament{color:var(--gold); letter-spacing:.6em; font-size:12px; margin-bottom:20px}
+  .intro p{font-size:17px; color:var(--ink-soft); letter-spacing:.05em}
+  .city{padding:64px 0 26px}
+  .city-head{text-align:center; margin-bottom:40px}
+  .city-head .cn{font-size:42px; letter-spacing:.35em; text-indent:.35em; font-weight:600}
+  .city-head .en{color:var(--gold); letter-spacing:.5em; font-size:11px; margin-top:8px; text-transform:uppercase}
   .city-head .poem{
-    margin-top:18px; color:var(--ink-soft); font-size:15px; letter-spacing:.12em;
+    margin-top:16px; color:var(--ink-soft); font-size:15px; letter-spacing:.14em;
     display:flex; align-items:center; justify-content:center; gap:16px;
   }
   .city-head .poem::before,.city-head .poem::after{content:"—"; color:var(--gold); opacity:.7}
-  .city-head .note{margin-top:10px; font-size:13.5px; color:#9a8f82; letter-spacing:.08em}
-  /* masonry gallery */
-  .gallery{columns:3 260px; column-gap:16px}
+  .city-head .note{margin-top:8px; font-size:13px; color:#9a8f82; letter-spacing:.1em}
+  /* gallery: 规整三列，顺序不乱 */
+  .gallery{display:flex; flex-wrap:wrap; gap:18px}
   .gallery figure{
-    break-inside:avoid; margin:0 0 16px; position:relative; overflow:hidden; border-radius:10px;
-    box-shadow:0 8px 26px rgba(60,45,30,.14); cursor:zoom-in;
+    flex:1 1 calc(33.333% - 12px); min-width:250px; margin:0;
+    overflow:hidden; border-radius:12px; position:relative; cursor:zoom-in;
+    box-shadow:0 10px 30px rgba(60,45,30,.13);
+    background:#EFE7DA;
   }
-  .gallery img{width:100%; display:block; transition:transform .6s ease}
-  .gallery figure:hover img{transform:scale(1.045)}
+  .gallery img{width:100%; height:auto; display:block; transition:transform .55s ease}
+  .gallery figure:hover img{transform:scale(1.04)}
   .gallery figure::after{
-    content:"↗"; position:absolute; right:12px; bottom:8px; color:rgba(255,255,255,.9);
-    font-size:15px; opacity:0; transition:.3s;
+    content:"⤢"; position:absolute; right:14px; bottom:10px; color:rgba(255,255,255,.92);
+    font-size:16px; opacity:0; transition:.3s; text-shadow:0 1px 4px rgba(0,0,0,.4);
   }
   .gallery figure:hover::after{opacity:1}
   /* divider */
   .divider{display:flex; align-items:center; justify-content:center; gap:14px; color:var(--gold);
-    margin:60px 0 10px; font-size:12px; letter-spacing:.4em}
-  .divider::before,.divider::after{content:""; width:70px; height:1px; background:var(--line)}
+    margin:56px 0 6px; font-size:11px; letter-spacing:.5em}
+  .divider::before,.divider::after{content:""; width:80px; height:1px; background:var(--line)}
   /* closing */
-  .closing{max-width:640px; margin:90px auto; text-align:center}
-  .closing .quote{font-size:19px; color:var(--ink); letter-spacing:.08em; line-height:2.2}
-  .closing .sign{margin-top:30px; color:var(--gold); letter-spacing:.3em; font-size:14px}
+  .closing{max-width:620px; margin:88px auto; text-align:center}
+  .closing .quote{font-size:18px; color:var(--ink); letter-spacing:.1em; line-height:2.3}
+  .closing .sign{margin-top:28px; color:var(--gold); letter-spacing:.35em; font-size:13px}
   footer{
     text-align:center; padding:40px 20px 60px; color:#a3988a; font-size:13px;
-    border-top:1px solid var(--line); letter-spacing:.15em;
+    border-top:1px solid var(--line); letter-spacing:.2em;
   }
   /* lightbox */
   #lightbox{
     position:fixed; inset:0; z-index:100; display:none; align-items:center; justify-content:center;
-    background:rgba(15,12,9,.92); cursor:zoom-out; padding:30px;
+    background:rgba(15,12,9,.93); cursor:zoom-out; padding:26px;
   }
   #lightbox img{max-width:92vw; max-height:90vh; object-fit:contain; border-radius:6px;
-    box-shadow:0 10px 60px rgba(0,0,0,.5)}
-  @media (max-width:640px){ .hero h1{letter-spacing:.1em;text-indent:.1em} }
+    box-shadow:0 10px 60px rgba(0,0,0,.55)}
+  @media (max-width:720px){
+    .gallery figure{flex:1 1 100%}
+    .hero h1{letter-spacing:.12em;text-indent:.12em}
+  }
 </style>
 </head>
 <body>
 
 <!-- ======== Hero ======== -->
 <header class="hero">
-  <img class="bg" src="images/img_12.jpg" alt="江南" loading="eager">
+  <img class="bg" src="images/img_23.jpg" alt="江南" loading="eager">
   <div class="inner">
-    <div class="kicker">一 家 人 的 夏 日 漫 游</div>
+    <div class="kicker">盛 夏 · 四 城 · 十 日</div>
     <h1>江南十日</h1>
     <div class="sub">上海 · 杭州 · 苏州 · 扬州</div>
   </div>
@@ -126,11 +130,10 @@
   <section class="intro">
     <div class="ornament">❖ ❖ ❖</div>
     <p>
-      二〇二六年的盛夏，我和爸爸、妈妈、姥姥，用十天的时间，
-      从一座城走到另一座城。上海的霓虹，杭州的烟雨，苏州的水巷，
-      扬州的明月——都被收进小小的相机里，也收进往后的日子里。
+      二〇二六年的盛夏，我们用十天，从一座城走到另一座城。
+      上海的霓虹，杭州的烟雨，苏州的水巷，扬州的明月——
+      都被收进小小的相机里，也收进往后的日子里。
     </p>
-    <div class="families">我 · 爸爸 · 妈妈 · 姥姥</div>
   </section>
 
   <!-- ======== 上海 ======== -->
@@ -139,7 +142,7 @@
       <div class="cn">上海</div>
       <div class="en">Shanghai</div>
       <div class="poem">十里洋场 · 霓虹如昼</div>
-      <div class="note">第一站 · 我们站在外滩的晚风里</div>
+      <div class="note">第一站 · 站在外滩的晚风里</div>
     </div>
     <div class="gallery">
       <figure><img src="images/img_01.jpg" alt="上海 1" loading="lazy"></figure>
@@ -162,7 +165,7 @@
       <div class="cn">杭州</div>
       <div class="en">Hangzhou</div>
       <div class="poem">欲把西湖比西子 · 淡妆浓抹总相宜</div>
-      <div class="note">第二站 · 姥姥说，西湖的雨是甜的</div>
+      <div class="note">第二站 · 西湖的雨落在伞沿</div>
     </div>
     <div class="gallery">
       <figure><img src="images/img_10.jpg" alt="杭州 1" loading="lazy"></figure>
@@ -226,8 +229,8 @@
   <!-- ======== Closing ======== -->
   <section class="closing">
     <div class="quote">
-      「旅行的意义，不是看了多少风景，<br>
-      而是和最重要的人，一起走过这些风景。」
+      「旅行的意义，不在看过多少风景，<br>
+      而在路上的每一刻，都恰好值得记住。」
     </div>
     <div class="sign">—— 写于归来后的夏天</div>
   </section>
@@ -235,8 +238,7 @@
 </main>
 
 <footer>
-  江南十日 · 2026 夏　|　上海 — 杭州 — 苏州 — 扬州<br>
-  与爸爸、妈妈、姥姥同行
+  江南十日 · 2026 夏　|　上海 — 杭州 — 苏州 — 扬州
 </footer>
 
 <!-- ======== Lightbox ======== -->
